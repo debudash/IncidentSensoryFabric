@@ -1,0 +1,8 @@
+# Local Capstone demo — run on your machine, then open http://127.0.0.1:4317
+services:
+  isf:
+    build: .
+    image: incident-sensory-fabric:phase1
+    ports:
+      - "4317:4317"
+    restart: unless-stopped

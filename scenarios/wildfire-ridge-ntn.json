@@ -1,0 +1,401 @@
+{
+  "incident": {
+    "id": "INC-WF-RIDGE-2026-041",
+    "title": "Wildfire Ridge — North Division",
+    "summary": "Wildfire on Ridge 4. The command talkgroup starts on terrestrial broadband, fades, and falls back to NTN narrowband. The video lane drops. Spoken intel stays keyed to MCPTT identity. Fully simulated.",
+    "location": "Ridge 4, Sector North",
+    "talkgroupId": "TG-FIRE-CMD",
+    "startedAt": "2026-09-28T14:02:00.000Z",
+    "phase": 1,
+    "honestyBanner": "SIMULATED — Capstone demo; no live Fusion/Fusus/LEO/agency claim",
+    "honestyDetail": "Capstone simulation only. MCPTT IDs, media, and NTN path state are synthetic. Not connected to Motorola, FirstNet, Axon, or any agency system."
+  },
+  "actors": [
+    {
+      "mcpttId": "mcptt:user:ic-01",
+      "callsign": "IC North",
+      "role": "Incident Commander",
+      "functionalAlias": "FA:IC-NORTH"
+    },
+    {
+      "mcpttId": "mcptt:user:e12-lt",
+      "callsign": "Engine 12",
+      "role": "Engine Lieutenant",
+      "functionalAlias": "FA:ENG-12"
+    },
+    {
+      "mcpttId": "mcptt:user:air-01",
+      "callsign": "Air-01",
+      "role": "Air Support drone",
+      "functionalAlias": null
+    },
+    {
+      "mcpttId": "mcptt:user:disp-01",
+      "callsign": "Dispatch",
+      "role": "Dispatch",
+      "functionalAlias": null
+    }
+  ],
+  "events": [
+    {
+      "t": "2026-09-28T14:02:00.000Z",
+      "kind": "ntn_path",
+      "identity": {
+        "mcpttId": "mcptt:user:ic-01",
+        "talkgroupId": "TG-FIRE-CMD",
+        "functionalAlias": "FA:IC-NORTH"
+      },
+      "provenance": {
+        "eventId": "evt-ntn-terrestrial",
+        "parentEventIds": [],
+        "sourceAdapter": "sim-ntn",
+        "ingestedAt": "2026-09-28T14:02:00.180Z",
+        "contentHash": "e8e5f3e5312889b895bbe60e3de9befc658f72cf31dc12570d0155a2fa6697cf"
+      },
+      "payload": {
+        "state": "TERRESTRIAL",
+        "bearer": "terrestrial-lte",
+        "rttMs": 42,
+        "bitrateKbps": 12000,
+        "lossPct": 0.1,
+        "note": "Command net on terrestrial broadband. Video and voice both available."
+      }
+    },
+    {
+      "t": "2026-09-28T14:02:11.000Z",
+      "kind": "floor",
+      "identity": {
+        "mcpttId": "mcptt:user:ic-01",
+        "talkgroupId": "TG-FIRE-CMD",
+        "functionalAlias": "FA:IC-NORTH"
+      },
+      "provenance": {
+        "eventId": "evt-floor-ic",
+        "parentEventIds": [
+          "evt-ntn-terrestrial"
+        ],
+        "sourceAdapter": "sim-mcptt",
+        "ingestedAt": "2026-09-28T14:02:11.140Z",
+        "contentHash": "0f02872562d914f641eae5e756846c896287e14fb64ec8f7b53fdd87c7215f79"
+      },
+      "payload": {
+        "action": "floor_grant",
+        "grantedTo": "mcptt:user:ic-01",
+        "priority": "emergency",
+        "durationMs": 9200,
+        "talkburstId": "tb-ic-140211"
+      }
+    },
+    {
+      "t": "2026-09-28T14:02:12.400Z",
+      "kind": "audio_turn",
+      "identity": {
+        "mcpttId": "mcptt:user:ic-01",
+        "talkgroupId": "TG-FIRE-CMD",
+        "functionalAlias": "FA:IC-NORTH"
+      },
+      "provenance": {
+        "eventId": "evt-audio-ic",
+        "parentEventIds": [
+          "evt-floor-ic"
+        ],
+        "sourceAdapter": "sim-siprec",
+        "ingestedAt": "2026-09-28T14:02:12.880Z",
+        "contentHash": "be17c1f01848cf7f7cb7a8ddeefe18ebc80cdfaedff473a398dfb82a0a168448"
+      },
+      "payload": {
+        "label": "IC North talkburst",
+        "durationMs": 8400,
+        "codec": "AMR-WB",
+        "simulated": true,
+        "mediaRef": "sim://siprec/INC-WF-RIDGE-2026-041/tb-ic-140211",
+        "transcriptPreview": "All units on Fire Command, IC North. Wind is shifting west on Ridge Four. Engine Twelve, hold the dozer line. Air, I need a picture of the west flank before it jumps the road."
+      }
+    },
+    {
+      "t": "2026-09-28T14:02:21.200Z",
+      "kind": "asr_snippet",
+      "identity": {
+        "mcpttId": "mcptt:user:ic-01",
+        "talkgroupId": "TG-FIRE-CMD",
+        "functionalAlias": "FA:IC-NORTH"
+      },
+      "provenance": {
+        "eventId": "evt-asr-ic",
+        "parentEventIds": [
+          "evt-audio-ic"
+        ],
+        "sourceAdapter": "sim-siprec",
+        "ingestedAt": "2026-09-28T14:02:21.640Z",
+        "contentHash": "732a086d1e3e79721c97c0c221724320c78bbdb8690c7118fa1c84ced044d441"
+      },
+      "payload": {
+        "text": "All units on Fire Command, IC North. Wind is shifting west on Ridge Four. Engine Twelve, hold the dozer line. Air, I need a picture of the west flank before it jumps the road.",
+        "confidence": 0.94,
+        "language": "en-US",
+        "engine": "sim-asr-stub",
+        "simulatedAsr": true,
+        "sourceTalkburstId": "tb-ic-140211"
+      }
+    },
+    {
+      "t": "2026-09-28T14:03:36.000Z",
+      "kind": "video_clip",
+      "identity": {
+        "mcpttId": "mcptt:user:air-01",
+        "talkgroupId": "TG-FIRE-CMD"
+      },
+      "provenance": {
+        "eventId": "evt-video-air",
+        "parentEventIds": [
+          "evt-ntn-terrestrial"
+        ],
+        "sourceAdapter": "sim-video",
+        "ingestedAt": "2026-09-28T14:03:36.420Z",
+        "contentHash": "97b755604a029c758e7d00a5d88565d3c491e5429e24b36b34c1a65494f59868"
+      },
+      "payload": {
+        "label": "West flank, Ridge 4",
+        "source": "drone",
+        "durationMs": 18000,
+        "resolution": "1920x1080",
+        "thumbnailLabel": "WEST FLANK · RIDGE 4",
+        "simulated": true,
+        "mediaRef": "sim://video/air-01/west-flank-140336",
+        "note": "Clip stub only. No live airframe feed."
+      }
+    },
+    {
+      "t": "2026-09-28T14:04:48.000Z",
+      "kind": "audio_turn",
+      "identity": {
+        "mcpttId": "mcptt:user:e12-lt",
+        "talkgroupId": "TG-FIRE-CMD",
+        "functionalAlias": "FA:ENG-12"
+      },
+      "provenance": {
+        "eventId": "evt-audio-e12",
+        "parentEventIds": [],
+        "sourceAdapter": "sim-siprec",
+        "ingestedAt": "2026-09-28T14:04:48.510Z",
+        "contentHash": "30d8c165697ea317283ef95097ee1496726bf0f49bab8351d65c1d96c5f2d66b"
+      },
+      "payload": {
+        "label": "Engine 12 talkburst",
+        "durationMs": 6100,
+        "codec": "AMR-WB",
+        "simulated": true,
+        "mediaRef": "sim://siprec/INC-WF-RIDGE-2026-041/tb-e12-140448",
+        "transcriptPreview": "Engine Twelve lieutenant. Spot fire has jumped the ridge road, about fifty yards west of the dozer line. We are holding. Need another hose team."
+      }
+    },
+    {
+      "t": "2026-09-28T14:04:55.000Z",
+      "kind": "asr_snippet",
+      "identity": {
+        "mcpttId": "mcptt:user:e12-lt",
+        "talkgroupId": "TG-FIRE-CMD",
+        "functionalAlias": "FA:ENG-12"
+      },
+      "provenance": {
+        "eventId": "evt-asr-e12",
+        "parentEventIds": [
+          "evt-audio-e12"
+        ],
+        "sourceAdapter": "sim-siprec",
+        "ingestedAt": "2026-09-28T14:04:55.330Z",
+        "contentHash": "ca48097ba8d0015bd117ca6f6f49460a2f2ae2a2c951631656bc1c2317c8c4ef"
+      },
+      "payload": {
+        "text": "Engine Twelve lieutenant. Spot fire has jumped the ridge road, about fifty yards west of the dozer line. We are holding. Need another hose team.",
+        "confidence": 0.88,
+        "language": "en-US",
+        "engine": "sim-asr-stub",
+        "simulatedAsr": true,
+        "sourceTalkburstId": "tb-e12-140448"
+      }
+    },
+    {
+      "t": "2026-09-28T14:05:40.000Z",
+      "kind": "video_clip",
+      "identity": {
+        "mcpttId": "mcptt:user:e12-lt",
+        "talkgroupId": "TG-FIRE-CMD",
+        "functionalAlias": "FA:ENG-12"
+      },
+      "provenance": {
+        "eventId": "evt-video-e12",
+        "parentEventIds": [
+          "evt-audio-e12"
+        ],
+        "sourceAdapter": "sim-video",
+        "ingestedAt": "2026-09-28T14:05:40.270Z",
+        "contentHash": "1f3513ece8639ae8f163d9f85368a11025839b0ee11587ff1a66462c0e650e33"
+      },
+      "payload": {
+        "label": "Dozer line, spot fire",
+        "source": "bodycam",
+        "durationMs": 12000,
+        "resolution": "1280x720",
+        "thumbnailLabel": "BODYCAM · DOZER LINE",
+        "simulated": true,
+        "mediaRef": "sim://video/e12-lt/bodycam-140540",
+        "note": "Clip stub only. No live body-worn camera feed."
+      }
+    },
+    {
+      "t": "2026-09-28T14:06:40.000Z",
+      "kind": "ntn_path",
+      "identity": {
+        "mcpttId": "mcptt:user:ic-01",
+        "talkgroupId": "TG-FIRE-CMD",
+        "functionalAlias": "FA:IC-NORTH"
+      },
+      "provenance": {
+        "eventId": "evt-ntn-degraded",
+        "parentEventIds": [
+          "evt-ntn-terrestrial"
+        ],
+        "sourceAdapter": "sim-ntn",
+        "ingestedAt": "2026-09-28T14:06:40.190Z",
+        "contentHash": "81618ad450001f5823ee4db6b84b1ce7886050333e9daa325e9259edca57450d"
+      },
+      "payload": {
+        "state": "DEGRADED",
+        "bearer": "terrestrial-lte",
+        "rttMs": 480,
+        "bitrateKbps": 900,
+        "lossPct": 8.4,
+        "note": "Smoke and terrain. Uplink collapsing. Drone picture stalling."
+      }
+    },
+    {
+      "t": "2026-09-28T14:06:41.000Z",
+      "kind": "decision_cue",
+      "identity": {
+        "mcpttId": "mcptt:user:ic-01",
+        "talkgroupId": "TG-FIRE-CMD",
+        "functionalAlias": "FA:IC-NORTH"
+      },
+      "provenance": {
+        "eventId": "evt-cue-degraded",
+        "parentEventIds": [
+          "evt-ntn-degraded"
+        ],
+        "sourceAdapter": "sim-ntn",
+        "ingestedAt": "2026-09-28T14:06:41.080Z",
+        "contentHash": "9226c740f69acf19d7c24b4824839db3d212c8ee396b2fbd9a5a77f9c51745e5"
+      },
+      "payload": {
+        "severity": "caution",
+        "title": "Video unreliable",
+        "message": "Video unreliable on TG-FIRE-CMD. Treat the picture as suspect. Spoken intel stays keyed.",
+        "videoLane": "unreliable",
+        "spokenIntel": "remains_keyed",
+        "triggeredByState": "DEGRADED"
+      }
+    },
+    {
+      "t": "2026-09-28T14:08:15.000Z",
+      "kind": "ntn_path",
+      "identity": {
+        "mcpttId": "mcptt:user:ic-01",
+        "talkgroupId": "TG-FIRE-CMD",
+        "functionalAlias": "FA:IC-NORTH"
+      },
+      "provenance": {
+        "eventId": "evt-ntn-narrowband",
+        "parentEventIds": [
+          "evt-ntn-degraded"
+        ],
+        "sourceAdapter": "sim-ntn",
+        "ingestedAt": "2026-09-28T14:08:15.220Z",
+        "contentHash": "449cea9cac6c0a7109b1191b0dc6314f355e2f9bb1e0edb69b5252f29dac3826"
+      },
+      "payload": {
+        "state": "NTN_NARROWBAND",
+        "bearer": "ntn-narrowband",
+        "rttMs": 1800,
+        "bitrateKbps": 48,
+        "lossPct": 1.2,
+        "note": "Command net fell back to NTN narrowband. Video bearer is down. Voice remains on the talkgroup."
+      }
+    },
+    {
+      "t": "2026-09-28T14:08:16.000Z",
+      "kind": "decision_cue",
+      "identity": {
+        "mcpttId": "mcptt:user:ic-01",
+        "talkgroupId": "TG-FIRE-CMD",
+        "functionalAlias": "FA:IC-NORTH"
+      },
+      "provenance": {
+        "eventId": "evt-cue-narrowband",
+        "parentEventIds": [
+          "evt-ntn-narrowband"
+        ],
+        "sourceAdapter": "sim-ntn",
+        "ingestedAt": "2026-09-28T14:08:16.090Z",
+        "contentHash": "92fb02ff6624c3f85a3525900f434234606d7e396e24471963908f32d69cd2d3"
+      },
+      "payload": {
+        "severity": "critical",
+        "title": "Video unavailable",
+        "message": "Video unavailable — rely on keyed talkgroup ASR.",
+        "videoLane": "unavailable",
+        "spokenIntel": "remains_keyed",
+        "triggeredByState": "NTN_NARROWBAND"
+      }
+    },
+    {
+      "t": "2026-09-28T14:08:52.000Z",
+      "kind": "audio_turn",
+      "identity": {
+        "mcpttId": "mcptt:user:disp-01",
+        "talkgroupId": "TG-FIRE-CMD"
+      },
+      "provenance": {
+        "eventId": "evt-audio-disp",
+        "parentEventIds": [
+          "evt-cue-narrowband"
+        ],
+        "sourceAdapter": "sim-siprec",
+        "ingestedAt": "2026-09-28T14:08:52.410Z",
+        "contentHash": "fa919b5a1f5e873ef25e6701870111b4de1bf6b76ca34925c13328f46a35fdd6"
+      },
+      "payload": {
+        "label": "Dispatch talkburst",
+        "durationMs": 7200,
+        "codec": "AMR-WB",
+        "simulated": true,
+        "mediaRef": "sim://siprec/INC-WF-RIDGE-2026-041/tb-disp-140852",
+        "transcriptPreview": "Dispatch to IC North. Additional engine is rolling. I copy video down on your path. Stay on Fire Command voice. We have your keyed traffic."
+      }
+    },
+    {
+      "t": "2026-09-28T14:09:00.000Z",
+      "kind": "asr_snippet",
+      "identity": {
+        "mcpttId": "mcptt:user:disp-01",
+        "talkgroupId": "TG-FIRE-CMD"
+      },
+      "provenance": {
+        "eventId": "evt-asr-disp",
+        "parentEventIds": [
+          "evt-audio-disp"
+        ],
+        "sourceAdapter": "sim-siprec",
+        "ingestedAt": "2026-09-28T14:09:00.360Z",
+        "contentHash": "65218c6ef9a5fd27c26d371c05b55c30716e378e56575320d94282648e23e026"
+      },
+      "payload": {
+        "text": "Dispatch to IC North. Additional engine is rolling. I copy video down on your path. Stay on Fire Command voice. We have your keyed traffic.",
+        "confidence": 0.91,
+        "language": "en-US",
+        "engine": "sim-asr-stub",
+        "simulatedAsr": true,
+        "sourceTalkburstId": "tb-disp-140852"
+      }
+    }
+  ]
+}

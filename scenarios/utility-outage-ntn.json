@@ -1,0 +1,401 @@
+{
+  "incident": {
+    "id": "INC-UTIL-FEEDER-2026-018",
+    "title": "Feeder 12 Outage — North Ridge",
+    "summary": "Storm lockout on Feeder 12. The utility command talkgroup starts on terrestrial broadband, fades in the canyon, and falls back to NTN narrowband. The inspection picture drops. Spoken intel stays keyed to MCPTT identity. Fully simulated.",
+    "location": "Feeder 12, Ridge Substation",
+    "talkgroupId": "TG-UTIL-CMD",
+    "startedAt": "2026-10-01T02:14:00.000Z",
+    "phase": 1,
+    "honestyBanner": "SIMULATED — Capstone demo; no live Fusion/Fusus/LEO/agency claim",
+    "honestyDetail": "Capstone simulation only. MCPTT IDs, media, and NTN path state are synthetic. Not connected to Motorola, FirstNet, Axon, or any agency system."
+  },
+  "actors": [
+    {
+      "mcpttId": "mcptt:user:sup-01",
+      "callsign": "Duty Supervisor",
+      "role": "Duty Supervisor",
+      "functionalAlias": "FA:SUP-NORTH"
+    },
+    {
+      "mcpttId": "mcptt:user:line-04",
+      "callsign": "Line 4",
+      "role": "Line Crew 4",
+      "functionalAlias": "FA:LINE-04"
+    },
+    {
+      "mcpttId": "mcptt:user:uav-02",
+      "callsign": "UAV-02",
+      "role": "Inspection drone",
+      "functionalAlias": null
+    },
+    {
+      "mcpttId": "mcptt:user:udisp-01",
+      "callsign": "Utility Dispatch",
+      "role": "Utility Dispatch",
+      "functionalAlias": null
+    }
+  ],
+  "events": [
+    {
+      "t": "2026-10-01T02:14:00.000Z",
+      "kind": "ntn_path",
+      "identity": {
+        "mcpttId": "mcptt:user:sup-01",
+        "talkgroupId": "TG-UTIL-CMD",
+        "functionalAlias": "FA:SUP-NORTH"
+      },
+      "provenance": {
+        "eventId": "evt-util-ntn-terrestrial",
+        "parentEventIds": [],
+        "sourceAdapter": "sim-ntn",
+        "ingestedAt": "2026-10-01T02:14:00.160Z",
+        "contentHash": "a13c5016d23ce793ca56fe1c90142b9efbb530cd54facd3e324eadb78c9eff1e"
+      },
+      "payload": {
+        "state": "TERRESTRIAL",
+        "bearer": "terrestrial-lte",
+        "rttMs": 38,
+        "bitrateKbps": 8000,
+        "lossPct": 0.2,
+        "note": "Utility command net on terrestrial broadband. Inspection video and voice both available."
+      }
+    },
+    {
+      "t": "2026-10-01T02:14:12.000Z",
+      "kind": "floor",
+      "identity": {
+        "mcpttId": "mcptt:user:sup-01",
+        "talkgroupId": "TG-UTIL-CMD",
+        "functionalAlias": "FA:SUP-NORTH"
+      },
+      "provenance": {
+        "eventId": "evt-util-floor-sup",
+        "parentEventIds": [
+          "evt-util-ntn-terrestrial"
+        ],
+        "sourceAdapter": "sim-mcptt",
+        "ingestedAt": "2026-10-01T02:14:12.140Z",
+        "contentHash": "30199a9352ea4e215ad56049f348ec0323f3c44aea8a37e316d2366b3cb29d3f"
+      },
+      "payload": {
+        "action": "floor_grant",
+        "grantedTo": "mcptt:user:sup-01",
+        "priority": "emergency",
+        "durationMs": 8000,
+        "talkburstId": "tb-sup-021412"
+      }
+    },
+    {
+      "t": "2026-10-01T02:14:13.200Z",
+      "kind": "audio_turn",
+      "identity": {
+        "mcpttId": "mcptt:user:sup-01",
+        "talkgroupId": "TG-UTIL-CMD",
+        "functionalAlias": "FA:SUP-NORTH"
+      },
+      "provenance": {
+        "eventId": "evt-util-audio-sup",
+        "parentEventIds": [
+          "evt-util-floor-sup"
+        ],
+        "sourceAdapter": "sim-siprec",
+        "ingestedAt": "2026-10-01T02:14:13.640Z",
+        "contentHash": "c39e401686a1a1ec7da1f8d0751988023bef1716c2badec8356aaa24792348a1"
+      },
+      "payload": {
+        "label": "Duty Supervisor talkburst",
+        "durationMs": 7600,
+        "codec": "AMR-WB",
+        "simulated": true,
+        "mediaRef": "sim://siprec/INC-UTIL-FEEDER-2026-018/tb-sup-021412",
+        "transcriptPreview": "Duty supervisor on Utility Command. Feeder Twelve is locked out after the storm. Line Four, I need eyes on the span west of the ridge substation. UAV, give me a picture before you lose the ridge."
+      }
+    },
+    {
+      "t": "2026-10-01T02:14:22.000Z",
+      "kind": "asr_snippet",
+      "identity": {
+        "mcpttId": "mcptt:user:sup-01",
+        "talkgroupId": "TG-UTIL-CMD",
+        "functionalAlias": "FA:SUP-NORTH"
+      },
+      "provenance": {
+        "eventId": "evt-util-asr-sup",
+        "parentEventIds": [
+          "evt-util-audio-sup"
+        ],
+        "sourceAdapter": "sim-siprec",
+        "ingestedAt": "2026-10-01T02:14:22.410Z",
+        "contentHash": "406c5c9ced74a41cffdfe89efb8e5d10b88a5958ceb87c64bc5af3ad261c9200"
+      },
+      "payload": {
+        "text": "Duty supervisor on Utility Command. Feeder Twelve is locked out after the storm. Line Four, I need eyes on the span west of the ridge substation. UAV, give me a picture before you lose the ridge.",
+        "confidence": 0.93,
+        "language": "en-US",
+        "engine": "sim-asr-stub",
+        "simulatedAsr": true,
+        "sourceTalkburstId": "tb-sup-021412"
+      }
+    },
+    {
+      "t": "2026-10-01T02:15:40.000Z",
+      "kind": "video_clip",
+      "identity": {
+        "mcpttId": "mcptt:user:uav-02",
+        "talkgroupId": "TG-UTIL-CMD"
+      },
+      "provenance": {
+        "eventId": "evt-util-video-uav",
+        "parentEventIds": [
+          "evt-util-ntn-terrestrial"
+        ],
+        "sourceAdapter": "sim-video",
+        "ingestedAt": "2026-10-01T02:15:40.380Z",
+        "contentHash": "3ea22ea5656ecbf8ce3279c15363fa28032c575f833c96c7e17e093afaff720a"
+      },
+      "payload": {
+        "label": "Downed span, west of Ridge Substation",
+        "source": "drone",
+        "durationMs": 16000,
+        "resolution": "1920x1080",
+        "thumbnailLabel": "UAV · DOWNED SPAN",
+        "simulated": true,
+        "mediaRef": "sim://video/uav-02/span-021540",
+        "note": "Clip stub only. No live airframe feed."
+      }
+    },
+    {
+      "t": "2026-10-01T02:16:55.000Z",
+      "kind": "audio_turn",
+      "identity": {
+        "mcpttId": "mcptt:user:line-04",
+        "talkgroupId": "TG-UTIL-CMD",
+        "functionalAlias": "FA:LINE-04"
+      },
+      "provenance": {
+        "eventId": "evt-util-audio-line",
+        "parentEventIds": [],
+        "sourceAdapter": "sim-siprec",
+        "ingestedAt": "2026-10-01T02:16:55.470Z",
+        "contentHash": "6edbb46d98b956fcb0da1f2d6c386711af833f8b561e297c50a3ad315a37ce45"
+      },
+      "payload": {
+        "label": "Line 4 talkburst",
+        "durationMs": 6800,
+        "codec": "AMR-WB",
+        "simulated": true,
+        "mediaRef": "sim://siprec/INC-UTIL-FEEDER-2026-018/tb-line-021655",
+        "transcriptPreview": "Line Four. The span is on the ground about two hundred yards west of the substation fence. We are holding clear. Request a second crew and a wire trailer."
+      }
+    },
+    {
+      "t": "2026-10-01T02:17:04.000Z",
+      "kind": "asr_snippet",
+      "identity": {
+        "mcpttId": "mcptt:user:line-04",
+        "talkgroupId": "TG-UTIL-CMD",
+        "functionalAlias": "FA:LINE-04"
+      },
+      "provenance": {
+        "eventId": "evt-util-asr-line",
+        "parentEventIds": [
+          "evt-util-audio-line"
+        ],
+        "sourceAdapter": "sim-siprec",
+        "ingestedAt": "2026-10-01T02:17:04.290Z",
+        "contentHash": "6ff78d2e5a1fe93357abdc6f7bcf59e9b06b5c288cf4d305cbbe09817bbaffc5"
+      },
+      "payload": {
+        "text": "Line Four. The span is on the ground about two hundred yards west of the substation fence. We are holding clear. Request a second crew and a wire trailer.",
+        "confidence": 0.9,
+        "language": "en-US",
+        "engine": "sim-asr-stub",
+        "simulatedAsr": true,
+        "sourceTalkburstId": "tb-line-021655"
+      }
+    },
+    {
+      "t": "2026-10-01T02:17:48.000Z",
+      "kind": "video_clip",
+      "identity": {
+        "mcpttId": "mcptt:user:line-04",
+        "talkgroupId": "TG-UTIL-CMD",
+        "functionalAlias": "FA:LINE-04"
+      },
+      "provenance": {
+        "eventId": "evt-util-video-line",
+        "parentEventIds": [
+          "evt-util-audio-line"
+        ],
+        "sourceAdapter": "sim-video",
+        "ingestedAt": "2026-10-01T02:17:48.250Z",
+        "contentHash": "2024de034df83041a56252237e6b9ed82d5d23adef8ae79c8e03099f3d78baa9"
+      },
+      "payload": {
+        "label": "Span on the ground, substation fence",
+        "source": "bodycam",
+        "durationMs": 11000,
+        "resolution": "1280x720",
+        "thumbnailLabel": "BODYCAM · DOWNED SPAN",
+        "simulated": true,
+        "mediaRef": "sim://video/line-04/bodycam-021748",
+        "note": "Clip stub only. No live body-worn camera feed."
+      }
+    },
+    {
+      "t": "2026-10-01T02:19:10.000Z",
+      "kind": "ntn_path",
+      "identity": {
+        "mcpttId": "mcptt:user:sup-01",
+        "talkgroupId": "TG-UTIL-CMD",
+        "functionalAlias": "FA:SUP-NORTH"
+      },
+      "provenance": {
+        "eventId": "evt-util-ntn-degraded",
+        "parentEventIds": [
+          "evt-util-ntn-terrestrial"
+        ],
+        "sourceAdapter": "sim-ntn",
+        "ingestedAt": "2026-10-01T02:19:10.180Z",
+        "contentHash": "4ddb83bae0d6dbd8bc9f7f4f7523172d140af3e7159bbde70396fd20a967390d"
+      },
+      "payload": {
+        "state": "DEGRADED",
+        "bearer": "terrestrial-lte",
+        "rttMs": 520,
+        "bitrateKbps": 640,
+        "lossPct": 11.2,
+        "note": "Canyon cut and weather. Uplink collapsing. Inspection picture stalling."
+      }
+    },
+    {
+      "t": "2026-10-01T02:19:11.000Z",
+      "kind": "decision_cue",
+      "identity": {
+        "mcpttId": "mcptt:user:sup-01",
+        "talkgroupId": "TG-UTIL-CMD",
+        "functionalAlias": "FA:SUP-NORTH"
+      },
+      "provenance": {
+        "eventId": "evt-util-cue-degraded",
+        "parentEventIds": [
+          "evt-util-ntn-degraded"
+        ],
+        "sourceAdapter": "sim-ntn",
+        "ingestedAt": "2026-10-01T02:19:11.070Z",
+        "contentHash": "3b078b860895e4abaacb7e4405c758b13325a512f71baf00cb3c76d23d1d9f61"
+      },
+      "payload": {
+        "severity": "caution",
+        "title": "Video unreliable",
+        "message": "Video unreliable on TG-UTIL-CMD. Treat the picture as suspect. Spoken intel stays keyed.",
+        "videoLane": "unreliable",
+        "spokenIntel": "remains_keyed",
+        "triggeredByState": "DEGRADED"
+      }
+    },
+    {
+      "t": "2026-10-01T02:21:05.000Z",
+      "kind": "ntn_path",
+      "identity": {
+        "mcpttId": "mcptt:user:sup-01",
+        "talkgroupId": "TG-UTIL-CMD",
+        "functionalAlias": "FA:SUP-NORTH"
+      },
+      "provenance": {
+        "eventId": "evt-util-ntn-narrowband",
+        "parentEventIds": [
+          "evt-util-ntn-degraded"
+        ],
+        "sourceAdapter": "sim-ntn",
+        "ingestedAt": "2026-10-01T02:21:05.210Z",
+        "contentHash": "331aa993c335e6e7619d2a5e8111deb1c1521c5a7b0c6e612e44d29f915deb45"
+      },
+      "payload": {
+        "state": "NTN_NARROWBAND",
+        "bearer": "ntn-narrowband",
+        "rttMs": 2100,
+        "bitrateKbps": 32,
+        "lossPct": 1.5,
+        "note": "Command net fell back to NTN narrowband. Video bearer is down. Voice remains on the talkgroup."
+      }
+    },
+    {
+      "t": "2026-10-01T02:21:06.000Z",
+      "kind": "decision_cue",
+      "identity": {
+        "mcpttId": "mcptt:user:sup-01",
+        "talkgroupId": "TG-UTIL-CMD",
+        "functionalAlias": "FA:SUP-NORTH"
+      },
+      "provenance": {
+        "eventId": "evt-util-cue-narrowband",
+        "parentEventIds": [
+          "evt-util-ntn-narrowband"
+        ],
+        "sourceAdapter": "sim-ntn",
+        "ingestedAt": "2026-10-01T02:21:06.080Z",
+        "contentHash": "92fb02ff6624c3f85a3525900f434234606d7e396e24471963908f32d69cd2d3"
+      },
+      "payload": {
+        "severity": "critical",
+        "title": "Video unavailable",
+        "message": "Video unavailable — rely on keyed talkgroup ASR.",
+        "videoLane": "unavailable",
+        "spokenIntel": "remains_keyed",
+        "triggeredByState": "NTN_NARROWBAND"
+      }
+    },
+    {
+      "t": "2026-10-01T02:21:40.000Z",
+      "kind": "audio_turn",
+      "identity": {
+        "mcpttId": "mcptt:user:udisp-01",
+        "talkgroupId": "TG-UTIL-CMD"
+      },
+      "provenance": {
+        "eventId": "evt-util-audio-disp",
+        "parentEventIds": [
+          "evt-util-cue-narrowband"
+        ],
+        "sourceAdapter": "sim-siprec",
+        "ingestedAt": "2026-10-01T02:21:40.360Z",
+        "contentHash": "931ae5c8f6341e1533f20e120174007b5fb1a91399b7db0bb0da5b83bccb6730"
+      },
+      "payload": {
+        "label": "Utility Dispatch talkburst",
+        "durationMs": 6400,
+        "codec": "AMR-WB",
+        "simulated": true,
+        "mediaRef": "sim://siprec/INC-UTIL-FEEDER-2026-018/tb-udisp-022140",
+        "transcriptPreview": "Utility dispatch to Duty Supervisor. Second crew is rolling. I copy video down on your path. Stay on Utility Command voice. We have your keyed traffic."
+      }
+    },
+    {
+      "t": "2026-10-01T02:21:49.000Z",
+      "kind": "asr_snippet",
+      "identity": {
+        "mcpttId": "mcptt:user:udisp-01",
+        "talkgroupId": "TG-UTIL-CMD"
+      },
+      "provenance": {
+        "eventId": "evt-util-asr-disp",
+        "parentEventIds": [
+          "evt-util-audio-disp"
+        ],
+        "sourceAdapter": "sim-siprec",
+        "ingestedAt": "2026-10-01T02:21:49.310Z",
+        "contentHash": "b723e8de4830b33bc5673fb1522d79e9d5de00f6563caf3a0ec9a87496168615"
+      },
+      "payload": {
+        "text": "Utility dispatch to Duty Supervisor. Second crew is rolling. I copy video down on your path. Stay on Utility Command voice. We have your keyed traffic.",
+        "confidence": 0.92,
+        "language": "en-US",
+        "engine": "sim-asr-stub",
+        "simulatedAsr": true,
+        "sourceTalkburstId": "tb-udisp-022140"
+      }
+    }
+  ]
+}
